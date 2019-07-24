@@ -62,7 +62,7 @@ node_templates:
       openstack_config: *openstack_config
       resource_id: { concat: ['alok-', 'k8s-master' ] }
       image: { get_secret: ubuntu_trusty_image }
-      flavor: { get_secret: small_image_flavor  }
+      flavor: { get_secret: medium_image_flavor  }
       agent_config:
         install_method: none
         # user: { get_input: agent_user }
@@ -86,7 +86,7 @@ node_templates:
       openstack_config: *openstack_config
       resource_id: { concat: ['alok-', 'k8s-worker' ] }
       image: { get_secret: ubuntu_trusty_image }
-      flavor: { get_secret: small_image_flavor  }
+      flavor: { get_secret: medium_image_flavor  }
       agent_config:
         install_method: none
         # user: { get_input: agent_user }
@@ -183,8 +183,8 @@ policies:
       default_instances: { get_input: worker_resource_count }
     targets: [worker_node_group]
 
-# outputs:
-#   private_ip:
-#     value: { get_attribute: [ port, fixed_ip_address ] }
-#   public_ip:
-#     value: { get_attribute: [ floating_ip, floating_ip_address ] }
+outputs:
+  cluster_ip:
+    value: { get_attribute: [ floating_ip, floating_ip_address ] }
+  master_private_ip:
+    value: { get_attribute: [ master_port, fixed_ip_address ] }

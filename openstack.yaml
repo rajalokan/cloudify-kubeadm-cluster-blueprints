@@ -64,9 +64,10 @@ node_templates:
       image: { get_secret: ubuntu_trusty_image }
       flavor: { get_secret: small_image_flavor  }
       agent_config:
-        user: { get_input: agent_user }
-        network: external
-        install_method: init_script
+        install_method: none
+        # user: { get_input: agent_user }
+        # network: external
+        # install_method: init_script
       server:
         key_name: { get_secret: cloud_key }
     relationships:
@@ -87,9 +88,10 @@ node_templates:
       image: { get_secret: ubuntu_trusty_image }
       flavor: { get_secret: small_image_flavor  }
       agent_config:
-        user: { get_input: agent_user }
-        network: external
-        install_method: init_script
+        install_method: none
+        # user: { get_input: agent_user }
+        # network: external
+        # install_method: init_script
       server:
         key_name: { get_secret: cloud_key }
     relationships:

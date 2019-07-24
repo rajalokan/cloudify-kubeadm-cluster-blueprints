@@ -32,7 +32,7 @@ output:
 # debug_uninstall:
 # 	cfy uninstall debug -p ignore_failure=true
 #
-# # //////////////////////////////////////////////////////////////////////////////
-#
-# cancel_install:
-# 	cfy exec cancel `cfy exec li -d playbox | grep "started " | cut -d'|' -f2`
+# //////////////////////////////////////////////////////////////////////////////
+
+cancel_install:
+	cfy exec cancel `cfy exec li -d ${NAME} | grep "started " | cut -d'|' -f2`

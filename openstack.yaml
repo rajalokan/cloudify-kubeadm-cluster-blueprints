@@ -36,25 +36,25 @@ dsl_definitions:
 
 
 node_templates:
-  bootstrap_master:
-    type: cloudify.nodes.Root
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        configure:
-          implementation: scripts/bootstrap_master.sh
-    relationships:
-      - type: cloudify.relationships.contained_in
-        target: master_host
-
-  bootstrap_worker:
-    type: cloudify.nodes.Root
-    interfaces:
-      cloudify.interfaces.lifecycle:
-        configure:
-          implementation: scripts/bootstrap_worker.sh
-    relationships:
-      - type: cloudify.relationships.contained_in
-        target: worker_host
+  # bootstrap_master:
+  #   type: cloudify.nodes.Root
+  #   interfaces:
+  #     cloudify.interfaces.lifecycle:
+  #       configure:
+  #         implementation: scripts/bootstrap_master.sh
+  #   relationships:
+  #     - type: cloudify.relationships.contained_in
+  #       target: master_host
+  #
+  # bootstrap_worker:
+  #   type: cloudify.nodes.Root
+  #   interfaces:
+  #     cloudify.interfaces.lifecycle:
+  #       configure:
+  #         implementation: scripts/bootstrap_worker.sh
+  #   relationships:
+  #     - type: cloudify.relationships.contained_in
+  #       target: worker_host
 
   master_host:
     type:  cloudify.openstack.nodes.Server

@@ -36,38 +36,37 @@ dsl_definitions:
 
 
 node_templates:
-  # bootstrap_master:
-  #   type: cloudify.nodes.Root
-  #   interfaces:
-  #     cloudify.interfaces.lifecycle:
-  #       configure:
-  #         implementation: scripts/bootstrap_master.sh
-  #   relationships:
-  #     - type: cloudify.relationships.contained_in
-  #       target: master_host
-  #
-  # bootstrap_worker:
-  #   type: cloudify.nodes.Root
-  #   interfaces:
-  #     cloudify.interfaces.lifecycle:
-  #       configure:
-  #         implementation: scripts/bootstrap_worker.sh
-  #   relationships:
-  #     - type: cloudify.relationships.contained_in
-  #       target: worker_host
+  bootstrap_master:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          implementation: scripts/bootstrap_master.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: master_host
+
+  bootstrap_worker:
+    type: cloudify.nodes.Root
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          implementation: scripts/bootstrap_worker.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: worker_host
 
   master_host:
     type:  cloudify.openstack.nodes.Server
     properties:
       openstack_config: *openstack_config
-      resource_id: { concat: ['alok-', 'k8s-master' ] }
+      # resource_id: { concat: ['alok-', 'k8s-master' ] }
       image: { get_secret: ubuntu_trusty_image }
       flavor: { get_secret: medium_image_flavor  }
       agent_config:
-        install_method: none
-        # user: { get_input: agent_user }
-        # network: external
-        # install_method: init_script
+        user: { get_input: agent_user }
+        network: external
+        install_method: init_script
       server:
         key_name: { get_secret: cloud_key }
     relationships:
@@ -84,14 +83,13 @@ node_templates:
     type:  cloudify.openstack.nodes.Server
     properties:
       openstack_config: *openstack_config
-      resource_id: { concat: ['alok-', 'k8s-worker' ] }
+      # resource_id: { concat: ['alok-', 'k8s-worker' ] }
       image: { get_secret: ubuntu_trusty_image }
       flavor: { get_secret: medium_image_flavor  }
       agent_config:
-        install_method: none
-        # user: { get_input: agent_user }
-        # network: external
-        # install_method: init_script
+        user: { get_input: agent_user }
+        network: external
+        install_method: init_script
       server:
         key_name: { get_secret: cloud_key }
     relationships:

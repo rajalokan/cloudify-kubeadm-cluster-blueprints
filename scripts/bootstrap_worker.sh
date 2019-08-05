@@ -10,7 +10,7 @@ if [[ ! -f /tmp/okanstack.sh ]]; then
 fi
 source /tmp/okanstack.sh
 # Preconfigure the instance
-preconfigure k8sworker
+#preconfigure k8sworker
 
 # 1. Install docker
 DOCKER_GPG_KEY_URL="https://download.docker.com/linux/ubuntu/gpg"

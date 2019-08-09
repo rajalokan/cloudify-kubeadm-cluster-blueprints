@@ -2,6 +2,18 @@
 
 ctx logger info "Bootstrapping k8s master node"
 
+# Install wget
+sudo apt install -y wget || sudo yum install -y wget
+#
+# setup okanstack
+if [[ ! -f /tmp/okanstack.sh ]]; then
+    wget -q https://raw.githubusercontent.com/rajalokan/okanstack/master/okanstack.sh -O /tmp/okanstack.sh
+fi
+source /tmp/okanstack.sh
+#
+# Preconfigure the instance
+# preconfigure k8smaster
+
 # Variables
 DOCKER_GPG_KEY_URL="https://download.docker.com/linux/ubuntu/gpg"
 DOCKER_APT_URL="https://download.docker.com/linux/ubuntu"
@@ -17,17 +29,6 @@ POD_NETWORK_CIDR="10.244.0.0/16"
 #
 KUBE_FLANNEL_URL="https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml"
 
-# Install wget
-sudo apt install -y wget || sudo yum install -y wget
-#
-# setup okanstack
-if [[ ! -f /tmp/okanstack.sh ]]; then
-    wget -q https://raw.githubusercontent.com/rajalokan/okanstack/master/okanstack.sh -O /tmp/okanstack.sh
-fi
-source /tmp/okanstack.sh
-#
-# Preconfigure the instance
-# preconfigure k8smaster
 
 # Install docker
 curl -fsSL ${DOCKER_GPG_KEY_URL} | sudo apt-key add -

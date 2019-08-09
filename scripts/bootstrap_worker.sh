@@ -4,13 +4,15 @@ ctx logger info "Bootstrapping k8s worker node"
 
 # Install wget
 sudo apt install -y wget || sudo yum install -y wget
+#
 # setup okanstack
 if [[ ! -f /tmp/okanstack.sh ]]; then
     wget -q https://raw.githubusercontent.com/rajalokan/okanstack/master/okanstack.sh -O /tmp/okanstack.sh
 fi
 source /tmp/okanstack.sh
+#
 # Preconfigure the instance
-#preconfigure k8sworker
+# preconfigure k8sworker2
 
 # 1. Install docker
 DOCKER_GPG_KEY_URL="https://download.docker.com/linux/ubuntu/gpg"

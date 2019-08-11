@@ -21,6 +21,7 @@ DOCKER_CE_VERSION="18.06.1~ce~3-0~ubuntu"
 #
 K8S_GPG_KEY_URL="https://packages.cloud.google.com/apt/doc/apt-key.gpg"
 K8S_APT_URL="https://apt.kubernetes.io"
+#
 KUBELET_VERSION="1.13.5-00"
 KUBEADM_VERSION="1.13.5-00"
 KUBECTL_VERSION="1.13.5-00"
@@ -44,7 +45,7 @@ deb ${K8S_APT_URL} kubernetes-xenial main
 EOF
 sudo apt update
 sudo apt install -y kubectl=${KUBECTL_VERSION} kubeadm=${KUBEADM_VERSION} kubelet=${KUBELET_VERSION}
-sudo apt-mark host kubectl kubeadm kubelet
+sudo apt-mark hold kubectl kubeadm kubelet
 
 # Bootstrap kubeadm to initialize the cluster using the IP range for Flannel
 sudo kubeadm init --pod-network-cidr=${POD_NETWORK_CIDR}
@@ -56,6 +57,7 @@ sudo chown $(id -u):$(id -g) ${HOME}/.kube/config
 kubectl version
 
 # Add flannel networking
+# Turn on iptable bridge
 echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 #
